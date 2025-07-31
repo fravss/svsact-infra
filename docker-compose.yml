@@ -1,0 +1,32 @@
+services:
+  mysql:
+    image: mysql
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: anaflavia01
+      MYSQL_DATABASE: svsact
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: ./backend
+    container_name: ct
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/svsact
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: anaflavia01
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:4200"
+
+volumes:
+  mysql_data:
