@@ -22,7 +22,7 @@ Certifique-se de que o Maven esteja instalado e que o comando `mvn` esteja dispo
 >  Eexecute manualmente no projeto backend:
 ```bash
 cd backend
-mvn clean package
+mvn clean package -DskipTests
 
 ````
 ### Suba os containers:
